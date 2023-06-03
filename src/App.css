@@ -1,38 +1,44 @@
-.App {
-  text-align: center;
+body {
+    margin: 0;
+    overflow: hidden;
+    background: rgb(11,35,72,1);
+    /* disables highlighting on mobile */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+    scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+canvas {
+    outline: none;
+    display: block;
+    position: absolute;
+    z-index: 0;
+    margin: auto;
+    margin-top: 56px;
+    height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.navbar-glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.37);
 }
 
-.App-link {
-  color: #61dafb;
+.card-glass {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.37);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-header-glass {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
