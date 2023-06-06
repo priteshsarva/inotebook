@@ -9,54 +9,58 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import "./style.css";
-
 // import required modules
-import { EffectCoverflow, Pagination,Navigation } from "swiper";
+import { EffectCoverflow, Pagination, Navigation } from "swiper";
 
+import NoteContext from '../context/notes/NotesContext';
 
 const Home = () => {
+  const context = useContext(NoteContext)
+  const { notes, addNote, deleteNote, editNote  } = context;
+
+const addnote=()=>{
+  console.log("ADD BUTTON CLICKED");
+}
+
   return (
     <>
-    <div className='d-flex align-items-center' style={{height: "80vh"}}>
-      <Swiper
-        effect={"coverflow"}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={"auto"}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: false,
-        }}
-        pagination={{
-          dynamicBullets: true,
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[EffectCoverflow, Pagination,Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>
-          <CardNotes/>
-        </SwiperSlide>
-        <SwiperSlide>
-          <CardNotes />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CardNotes />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CardNotes />
-        </SwiperSlide>
-        <SwiperSlide>
-          <CardNotes />
-        </SwiperSlide>
-      </Swiper>
-    </div>
+      <div className='d-flex align-items-center' style={{ height: "80vh" }}>
+        <Swiper
+          effect={"coverflow"}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={"auto"}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
+          }}
+          pagination={{
+            dynamicBullets: true,
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[EffectCoverflow, Pagination, Navigation]}
+          className="mySwiper"
+        >
+
+          {notes.map((notes) => {
+            return <>
+              <SwiperSlide key={notes._id} onClick={addNote}>
+                <CardNotes title={notes.title} notes={notes.description} />
+              </SwiperSlide>
+            </>
+          })}
+          
+          <SwiperSlide key="Add" onClick={addnote}>
+                <CardNotes title="" notes=""/>
+              </SwiperSlide>
+        </Swiper>
+      </div>
+
 
     </>
   )

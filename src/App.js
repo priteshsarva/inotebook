@@ -7,13 +7,13 @@ import "./App.css"
 const App = () => {
   return (
     <>
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/about" element={<Aboutus />} />
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/about" element={<Aboutus />} />
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
