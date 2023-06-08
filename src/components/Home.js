@@ -15,13 +15,14 @@ import { EffectCoverflow, Pagination, Navigation } from "swiper";
 
 import NoteContext from '../context/notes/NotesContext';
 
+
 const Home = () => {
   const context = useContext(NoteContext)
-  const { notes, addNote, deleteNote, editNote  } = context;
+  const { notes, addNote, deleteNote, editNote } = context;
 
-const addnote=()=>{
-  console.log("ADD BUTTON CLICKED");
-}
+  const addnote = () => {
+    console.log("ADD BUTTON CLICKED");
+  }
 
   return (
     <>
@@ -49,19 +50,18 @@ const addnote=()=>{
 
           {notes.map((notes) => {
             return <>
-              <SwiperSlide key={notes._id} onClick={addNote}>
+              <SwiperSlide key={notes._id} onClick={addNote} >
                 <CardNotes title={notes.title} notes={notes.description} />
               </SwiperSlide>
             </>
           })}
-          
-          <SwiperSlide key="Add" onClick={addnote}>
-                <CardNotes title="" notes=""/>
-              </SwiperSlide>
+
+          <SwiperSlide key="Add" onClick={addnote} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <CardNotes />
+          </SwiperSlide>
         </Swiper>
       </div>
-
-
+     
     </>
   )
 }
