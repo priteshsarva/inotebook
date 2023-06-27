@@ -1,7 +1,7 @@
 body {
     margin: 0;
     overflow: hidden;
-    background: rgb(11,35,72,1);
+    background: rgb(11, 35, 72, 1);
     /* disables highlighting on mobile */
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -41,4 +41,65 @@ canvas {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+}
+
+::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: var(--bs-body-color);
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: var(--bs-body-color);
+    opacity: 1;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: var(--bs-body-color);
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: var(--bs-body-color);
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: var(--bs-body-color);
+}
+
+::placeholder {
+    /* Most modern browsers support this now. */
+    color: var(--bs-body-color);
+}
+
+.form-control-plaintext {
+    color: white;
+    width: 110%;
+}
+
+::-webkit-scrollbar {
+    width: 1rem;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+    background-color: solid transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    border: 0.2rem solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+}
+
+textarea{
+    resize: none;
 }

@@ -1,11 +1,13 @@
 import React from 'react'
 import CardNotes from './CardNotes'
+import EditCard from './EditCard'
 
 const Aboutus = () => {
   return (
-    <div>
-      <h1>  about us</h1>    
-    </div >
+    <>
+  
+     
+    </ >
   )
 }
 

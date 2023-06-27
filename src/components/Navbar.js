@@ -4,6 +4,7 @@ import {
     Link,
     useLocation
 } from "react-router-dom";
+import EditCard from './EditCard';
 
 const Navbar = () => {
     let location = useLocation();
@@ -20,7 +21,7 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse " id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto ">
                             <li className="nav-item">
-                                <Link className={`nav-link ${location.pathname === "/add" ? "active" : ""}`} aria-current="page" to="/add">ADD</Link>
+                                <Link className={`nav-link ${location.pathname === "/add" ? "active" : ""}`} aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdrop">ADD</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className={`nav-link ${location.pathname === "/delete" ? "active" : ""}`} aria-current="page" to="/delete">DELETE</Link>
@@ -37,6 +38,9 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
+
+            <EditCard />
+
         </>
     )
 }
