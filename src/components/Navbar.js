@@ -23,23 +23,18 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <Link className={`nav-link ${location.pathname === "/add" ? "active" : ""}`} aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdrop">ADD</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className={`nav-link ${location.pathname === "/delete" ? "active" : ""}`} aria-current="page" to="/delete">DELETE</Link>
-                            </li>
+                           
                             <li className="nav-item">
                                 <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} aria-current="page" to="/about">About Us</Link>
 
                             </li>
                         </ul>
-                        <CircleUser color={"white"} width={"1.5em"}/>
-                        
-
-                            
+                        <CircleUser color={"white"} width={"1.5em"}/> 
                     </div>
                 </div>
             </nav>
 
-            <EditCard />
+            <EditCard /> 
 
         </>
     )

@@ -5,6 +5,7 @@ import Aboutus from './components/Aboutus'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css"
 import NoteState from './context/notes/NotesState';
+import Delete from './components/Delete';
 const App = () => {
   return (
     <>
