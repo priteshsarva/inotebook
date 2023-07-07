@@ -14,6 +14,7 @@ import "./style.css";
 import { EffectCoverflow, Pagination, Navigation } from "swiper";
 
 import NoteContext from '../context/notes/NotesContext';
+import EditCard from './EditCard';
 
 
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
   const { notes, deleteNote } = context;
 
   const refff = useRef(null)
+  const editcard = useRef(null)
 
   const [data, setdata] = useState({})
   const [editdata, setEditdata] = useState({})
@@ -37,7 +39,7 @@ const Home = () => {
     setEditdata({ id: document.querySelector(".swiper-slide-active").getAttribute("id"), title: document.querySelector(".swiper-slide-active").getAttribute("title") })
 
     console.log(editdata);
-    refff.current.click()
+    editcard.current.click()
 
   }
 
@@ -105,6 +107,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <button style={{ display: 'none' }} type="button" className="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#editcard" ref={editcard}></button>
+      <EditCard id={document.querySelector(".swiper-slide-active").getAttribute("id")} title={document.querySelector(".swiper-slide-active").getAttribute("title")} description={document.querySelector(".swiper-slide-active").getAttribute("description")}/>
 
     </>
   )
