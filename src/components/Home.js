@@ -36,9 +36,9 @@ const Home = () => {
 
   const openEditmodal = () => {
 
-    setEditdata({ id: document.querySelector(".swiper-slide-active").getAttribute("id"), title: document.querySelector(".swiper-slide-active").getAttribute("title") })
+    setEditdata({ id: document.querySelector(".swiper-slide-active").getAttribute("id"), title: document.querySelector(".swiper-slide-active").getAttribute("title"), description: document.querySelector(".swiper-slide-active").getAttribute("description"), tags: document.querySelector(".swiper-slide-active").getAttribute("tags") })
 
-    console.log(editdata);
+    console.log("before edit card " + editdata);
     editcard.current.click()
 
   }
@@ -108,7 +108,8 @@ const Home = () => {
         </div>
       </div>
       <button style={{ display: 'none' }} type="button" className="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#editcard" ref={editcard}></button>
-      <EditCard id={document.querySelector(".swiper-slide-active").getAttribute("id")} title={document.querySelector(".swiper-slide-active").getAttribute("title")} description={document.querySelector(".swiper-slide-active").getAttribute("description")}/>
+
+      <EditCard id={editdata.id} title={editdata.title} description={editdata.description} tags={editdata.tags} />
 
     </>
   )
