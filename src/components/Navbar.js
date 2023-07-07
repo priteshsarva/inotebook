@@ -4,7 +4,7 @@ import {
     Link,
     useLocation
 } from "react-router-dom";
-import EditCard from './EditCard';
+import AddCards from './AddCards';
 
 const Navbar = () => {
     let location = useLocation();
@@ -34,7 +34,7 @@ const Navbar = () => {
                 </div>
             </nav>
 
-            <EditCard /> 
+            <AddCards /> 
 
         </>
     )
