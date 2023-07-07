@@ -22,8 +22,7 @@ const EditCard = (props) => {
 
     const saveChanges = () => {
 
-        if (document.getElementById("modaltitle").value !== "" && document.getElementById("modaldescription").value !== "" &&
-            document.getElementById("modaltags").value !== "") {
+        if (document.getElementById("modaltitle").value !== "" && document.getElementById("modaldescription").value !== "") {
             addNote(notes)
             reff.current.click();
             removeValue()
@@ -72,8 +71,8 @@ const EditCard = (props) => {
                                 </div>
                                 <div className='d-flex justify-content-evenly' style={{ width: '100%' }}>
                                     <button type="button" className="btn btn-secondary " onClick={closeModal}>Close</button>
-                                    <button style={{ display: 'none' }} type="button" className="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#staticBackdrop1" ref={ref}>newww</button>
-                                    <button style={{ display: 'none' }} type="button" className="btn btn-secondary " data-bs-dismiss="modal" ref={reff}>newww</button>
+                                    <button style={{ display: 'none' }} type="button" className="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#staticBackdrop1" ref={ref}></button>
+                                    <button style={{ display: 'none' }} type="button" className="btn btn-secondary " data-bs-dismiss="modal" ref={reff}></button>
                                     <button type="sumit" className="btn btn-primary" onClick={saveChanges} >Save changes</button>
                                 </div>
                             </div>

@@ -76,6 +76,10 @@ body {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
+.delete{
+  transform: translateY(-12vh);
+}
+
 @media only screen and (min-device-width:320px)and (max-device-width:480px) {
 
   .swiper-button-prev,

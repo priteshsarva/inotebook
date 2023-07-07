@@ -65,10 +65,16 @@ const NoteState = (props) => {
 
   const addNote = (value) => {
 
+    var tags = value.tags
+
+    if (tags === '') {
+      tags = "General"
+    }
+
     const note = {
       "title": value.title,
       "description": value.description,
-      "tags": value.tags,
+      "tags": tags,
     }
     console.log("Note Added");
     setNotes(notes.concat(note))
@@ -87,7 +93,7 @@ const NoteState = (props) => {
   }
   // edit NOTE TO DB 
   const editNote = (id, title, description, tags) => {
-    
+
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
       if (element._id === id) {

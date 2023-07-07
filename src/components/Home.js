@@ -1,4 +1,4 @@
-import React, { useContext, useState,useRef } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import CardNotes from './CardNotes'
 
 // Import Swiper React components
@@ -27,12 +27,19 @@ const Home = () => {
 
   const deleteModal = (event) => {
 
-    setdata({ id: event.target.getAttribute("data-id"), title: event.target.getAttribute("data-title") })
+    let deletData = document.querySelector(".swiper-slide-active")
+
+    setdata({ id: deletData.getAttribute("id"), title: deletData.getAttribute("title") })
   }
 
   const openEditmodal = (event) => {
 
-    setEditdata({ id: event.target.getAttribute("id"), title: event.target.getAttribute("title"), description: event.target.getAttribute("description"), tags: event.target.getAttribute("tags") })
+     
+
+    setEditdata ({ id: document.querySelector(".swiper-slide-active").getAttribute("id"), title: document.querySelector(".swiper-slide-active").getAttribute("title") })
+    
+    
+    // setEditdata({ id: event.target.getAttribute("id"), title: event.target.getAttribute("title"), description: event.target.getAttribute("description"), tags: event.target.getAttribute("tags") })
     console.log(editdata);
     refff.current.click()
 
@@ -66,20 +73,22 @@ const Home = () => {
             return <>
               <SwiperSlide key={notes._id} id={notes._id} title={notes.title} description={notes.description} tags={notes.tags} onClick={(e) => { openEditmodal(e) }} >
                 <CardNotes key={notes._id} id={notes._id} title={notes.title} description={notes.description} tags={notes.tags} />
-                <div className='d-flex justify-content-center  '>
-                  <button type="button" id={notes._id} data-bs-toggle="modal" data-bs-target="#delete" className={`btn btn-danger col m-2 btn-value ${notes._id}`} onClick={(e) => { deleteModal(e) }} data-id={notes._id} data-title={notes.title}>Delete</button>
-                </div>
               </SwiperSlide>
 
             </>
           })}
-          <SwiperSlide key="Add" ref={refff}  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <SwiperSlide key="Add" ref={refff} data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <CardNotes />
           </SwiperSlide>
         </Swiper>
-
       </div>
 
+      {/* delete btn */}
+      <div className='d-flex justify-content-center delete '>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#delete" className={`btn btn-danger col-4 m-2 btn-value`} onClick={(e) => { deleteModal(e) }} >Delete</button>
+      </div>
+
+      {/* Modal delete */}
       <div className="modal fade" id="delete" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div className="modal-content card-glass">
