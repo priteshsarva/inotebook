@@ -25,21 +25,17 @@ const Home = () => {
   const [data, setdata] = useState({})
   const [editdata, setEditdata] = useState({})
 
-  const deleteModal = (event) => {
+  const deleteModal = () => {
 
     let deletData = document.querySelector(".swiper-slide-active")
 
     setdata({ id: deletData.getAttribute("id"), title: deletData.getAttribute("title") })
   }
 
-  const openEditmodal = (event) => {
+  const openEditmodal = () => {
 
-     
+    setEditdata({ id: document.querySelector(".swiper-slide-active").getAttribute("id"), title: document.querySelector(".swiper-slide-active").getAttribute("title") })
 
-    setEditdata ({ id: document.querySelector(".swiper-slide-active").getAttribute("id"), title: document.querySelector(".swiper-slide-active").getAttribute("title") })
-    
-    
-    // setEditdata({ id: event.target.getAttribute("id"), title: event.target.getAttribute("title"), description: event.target.getAttribute("description"), tags: event.target.getAttribute("tags") })
     console.log(editdata);
     refff.current.click()
 
