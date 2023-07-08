@@ -40,6 +40,7 @@ const AddCards = (props) => {
         }
     }
 
+    console.log("ADd cArd");
 
 
     return (

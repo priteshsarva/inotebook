@@ -1,5 +1,7 @@
 import React, { useContext, useState, useRef } from 'react'
 import CardNotes from './CardNotes'
+import EditCard from './EditCard'
+
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -14,7 +16,6 @@ import "./style.css";
 import { EffectCoverflow, Pagination, Navigation } from "swiper";
 
 import NoteContext from '../context/notes/NotesContext';
-import EditCard from './EditCard';
 
 
 const Home = () => {
@@ -36,10 +37,19 @@ const Home = () => {
 
   const openEditmodal = () => {
 
-    setEditdata({ id: document.querySelector(".swiper-slide-active").getAttribute("id"), title: document.querySelector(".swiper-slide-active").getAttribute("title") })
+    window.addEventListener("click",(e)=>{
+      console.log(e.target);
+    })
+
+    setEditdata({
+      id: document.querySelector(".swiper-slide-active").getAttribute("id"),
+      title: document.querySelector(".swiper-slide-active").getAttribute("title"),
+      description: document.querySelector(".swiper-slide-active").getAttribute("description"),
+      tags: document.querySelector(".swiper-slide-active").getAttribute("tags"),
+    })
 
     console.log(editdata);
-    editcard.current.click()
+    // editcard.current.click()
 
   }
 
@@ -107,8 +117,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <button style={{ display: 'none' }} type="button" className="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#editcard" ref={editcard}></button>
-      <EditCard id={document.querySelector(".swiper-slide-active").getAttribute("id")} title={document.querySelector(".swiper-slide-active").getAttribute("title")} description={document.querySelector(".swiper-slide-active").getAttribute("description")}/>
+
+      <button style={{ display: 'none' }} type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editcard2" ref={editcard}></button>
+      <EditCard editdata={editdata} />
 
     </>
   )
