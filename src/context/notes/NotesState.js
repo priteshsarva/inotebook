@@ -2,86 +2,65 @@ import React, { useState } from "react";
 import NoteContext from "./NotesContext";
 
 const NoteState = (props) => {
-  const notesdata = [
-    {
-      "_id": "64632530d82c8448d42f9aa8",
-      "user": "645f2a8ee45f89eeb2537e3a",
-      "title": "sdaaa1s",
-      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "tags": "personal",
-      "timeStamp": "2023-05-16T06:39:44.179Z",
-      "__v": 0
-    },
-    {
-      "_id": "64632530d82c8448d42f9aab",
-      "user": "645f2a8ee45f89eeb2537e3a",
-      "title": "sdaaa1s",
-      "description": "p24@mail.com",
-      "tags": "personal",
-      "timeStamp": "2023-05-16T06:39:44.550Z",
-      "__v": 0
-    },
-    {
-      "_id": "64632530d82c8448d42f9aae",
-      "user": "645f2a8ee45f89eeb2537e3a",
-      "title": "sdaaa1s",
-      "description": "p24@mail.com",
-      "tags": "personal, personal,personal, personal",
-      "timeStamp": "2023-05-16T06:39:44.775Z",
-      "__v": 0
-    },
-    {
-      "_id": "64632530d82c8448d42f9ab1",
-      "user": "645f2a8ee45f89eeb2537e3a",
-      "title": "sdaaa1s",
-      "description": "p24@mail.com",
-      "tags": "personal",
-      "timeStamp": "2023-05-16T06:39:44.984Z",
-      "__v": 0
-    },
-    {
-      "_id": "64632531d82c8448d42f9ab4",
-      "user": "645f2a8ee45f89eeb2537e3a",
-      "title": "sdaaa1s",
-      "description": "p24@mail.com",
-      "tags": "personal",
-      "timeStamp": "2023-05-16T06:39:45.157Z",
-      "__v": 0
-    },
-    {
-      "_id": "6465b672f0a27d5c4f49a8f9",
-      "user": "645f2a8ee45f89eeb2537e3a",
-      "title": "New ADDEDS",
-      "description": "p24@mail.com",
-      "tags": "personal",
-      "timeStamp": "2023-05-18T05:24:02.450Z",
-      "__v": 0
-    }
-  ]
+
+  const url = "http://localhost:5000"
+  const authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1ZjJhOGVlNDVmODllZWIyNTM3ZTNhIn0sImlhdCI6MTY4NDA0NzY0NH0.PcMsaT2ZKwoeFZ3T-BSQIvuCVMMVdsARPCwHQEsYIwk"
+  const notesdata = []
 
 
   const [notes, setNotes] = useState(notesdata)
   // ADD NOTE TO DB 
 
-  const addNote = (value) => {
+  const getAllNotes = async()=>{
+    const response = await fetch(`${url}/api/notes/savenote`, {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        "Auth-Token": authToken
+      },
+    });
+    const json = await response.json()
+    console.log(json);   
 
+  }
+
+
+
+  const addNote = async (value) => {
     var tags = value.tags
 
     if (tags === '') {
       tags = "General"
     }
+    const response = await fetch(`${url}/api/notes/savenote`, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        "Auth-Token": authToken
+      },
+      body: JSON.stringify({
+        "title": value.title.toString(),
+        "description": value.description.toString(),
+        "tags": tags,
+      }),
 
-    const note = {
-      "title": value.title,
-      "description": value.description,
-      "tags": tags,
-    }
+    });
+
+    console.log(response.json());   
     console.log("Note Added");
-    setNotes(notes.concat(note))
-
   }
   // Delete NOTE TO DB 
-  const deleteNote = (id) => {
+  const deleteNote = async(id) => {
+
+    const response = await fetch(`${url}/api/notes/deletnote/${id}`, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        "Auth-Token": authToken
+      },  
+    });
+
+    console.log(response.json());
 
     console.log(`log delete by ${id}`);
 
@@ -92,22 +71,36 @@ const NoteState = (props) => {
 
   }
   // edit NOTE TO DB 
-  const editNote = (id, title, description, tags) => {
+  const editNote = async (editNoteData) => {
+    const response = await fetch(`${url}/api/notes/updatenote/${editNoteData.id}`, {
+      method: "POST", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        "Auth-Token": authToken
+      },
+      body: JSON.stringify({
+        "title": editNoteData.title.toString(),
+        "description": editNoteData.description.toString(),
+        "tags": editNoteData.tags,
+      }),
+    });
 
-    for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
-      if (element._id === id) {
-        element.title = title
-        element.description = description
-        element.tags = tags
-      }
-    }
+    console.log(response.json()); 
+
+    // for (let index = 0; index < notes.length; index++) {
+    //   const element = notes[index];
+    //   if (element._id === editNoteData.id) {
+    //     element.title = editNoteData.title
+    //     element.description = editNoteData.description
+    //     element.tags = editNoteData.tags
+    //   }
+    // }
 
   }
 
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote }}>
+    <NoteContext.Provider value={{ getAllNotes, notes, addNote, deleteNote, editNote }}>
       {props.children}
     </NoteContext.Provider>
   )

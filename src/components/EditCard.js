@@ -3,7 +3,7 @@ import NoteContext from '../context/notes/NotesContext'
 
 const EditCard = (props) => {
     const context = useContext(NoteContext)
-    const { addNote } = context;
+    const { editNote } = context;
 
 
 
@@ -44,7 +44,8 @@ const EditCard = (props) => {
 
     const saveChanges = () => {
         if (document.getElementById("editModalTitle").value !== "" && document.getElementById("editModalDescription").value !== "") {
-            addNote(notes)
+            editNote(notes)
+            console.log(notes);
             reff.current.click();
             removeValue()
         }
@@ -55,15 +56,10 @@ const EditCard = (props) => {
         if (document.getElementById("editModalTitle").value === props.editdata.title && document.getElementById("editModalDescription").value === props.editdata.description &&
             document.getElementById("editModalTags").value === props.editdata.tags) {
             reff.current.click();
-            console.log("true");
         } else {
             ref.current.click();
-            console.log("false");
-
         }
     }
-    console.log("EDIT CARD SUCCEs");
-    console.log(props.editdata.title);
 
     return (
         <>

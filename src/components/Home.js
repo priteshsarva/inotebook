@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import CardNotes from './CardNotes'
 import EditCard from './EditCard'
 
@@ -20,7 +20,16 @@ import NoteContext from '../context/notes/NotesContext';
 
 const Home = () => {
   const context = useContext(NoteContext)
-  const { notes, deleteNote } = context;
+  const { notes, deleteNote, getAllNotes } = context;
+
+  useEffect(() => {
+    getAllNotes()
+  }, )
+
+  const [dnotes, setdnotes] = useState(notes)
+  useEffect(() => {
+    setdnotes(notes)
+  }, [notes])
 
   const refff = useRef(null)
   const editcard = useRef(null)
@@ -37,10 +46,6 @@ const Home = () => {
 
   const openEditmodal = () => {
 
-    window.addEventListener("click",(e)=>{
-      console.log(e.target);
-    })
-
     setEditdata({
       id: document.querySelector(".swiper-slide-active").getAttribute("id"),
       title: document.querySelector(".swiper-slide-active").getAttribute("title"),
@@ -49,7 +54,7 @@ const Home = () => {
     })
 
     console.log(editdata);
-    // editcard.current.click()
+    editcard.current.click()
 
   }
 
@@ -77,7 +82,7 @@ const Home = () => {
           className="mySwiper"
         >
 
-          {notes.map((notes) => {
+          {dnotes.map((notes) => {
             return <>
               <SwiperSlide key={notes._id} id={notes._id} title={notes.title} description={notes.description} tags={notes.tags} onClick={(e) => { openEditmodal(e) }} >
                 <CardNotes key={notes._id} id={notes._id} title={notes.title} description={notes.description} tags={notes.tags} />
