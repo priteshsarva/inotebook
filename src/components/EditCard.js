@@ -17,15 +17,8 @@ const EditCard = (props) => {
         })
     }, [props.editdata])
 
+    const [notes, setnotes] = useState({ title: "", tags: "", description: "" })
 
-    const [notes, setnotes] = useState(
-        {
-            title: '',
-            tags: '',
-            description: '',
-            id: '',
-        }
-    )
 
 
 
@@ -63,21 +56,21 @@ const EditCard = (props) => {
 
     return (
         <>
-            <div className="modal fade " id="editcard2" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div className="modal fade" id="editcard2" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <form>
                     <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                         <div className="modal-content card-glass">
                             <div className="modal-header card-header card-header-glass" data-bs-theme="dark">
 
                                 <h5 className="user-select-auto card-title text-light">
-                                    <input type="text" className="form-control-plaintext" id="editModalTitle" name='title' placeholder="Title" required value={notes.title} onChange={handleOnChange} />
+                                    <input type="text" className="form-control-plaintext" id="editModalTitle" name='title' placeholder="Title" required minLength={3} value={notes.title} onChange={handleOnChange} />
                                 </h5>
 
                                 <button type="button" className="btn-close light" onClick={closeModal} data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <div className="card-body d-flex align-item-center justify-content-center" style={{ position: "relative" }}>
-                                    <textarea className="form-control-plaintext" id="editModalDescription" value={notes.description} placeholder='Description' rows="12" name='description' required onChange={handleOnChange} ></textarea>
+                                    <textarea className="form-control-plaintext" id="editModalDescription" value={notes.description} placeholder='Description' rows="12" name='description' required minLength={3} onChange={handleOnChange} ></textarea>
                                 </div>
                             </div>
                             <div className="modal-footer">

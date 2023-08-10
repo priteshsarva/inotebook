@@ -5,18 +5,21 @@ import Aboutus from './components/Aboutus'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css"
 import NoteState from './context/notes/NotesState';
-import Delete from './components/Delete';
+import AuthState from './context/auth/AuthState';
+
 const App = () => {
   return (
     <>
-    <NoteState>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/about" element={<Aboutus />} />
-          <Route path="/" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      <NoteState>
+        <AuthState>
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+              <Route path="/about" element={<Aboutus />} />
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthState>
       </NoteState>
     </>
   )

@@ -21,7 +21,7 @@ const AddCards = (props) => {
     }
 
     const saveChanges = () => {
-
+        console.log(notes);
         if (document.getElementById("modaltitle").value !== "" && document.getElementById("modaldescription").value !== "") {
             addNote(notes)
             reff.current.click();
@@ -52,7 +52,7 @@ const AddCards = (props) => {
                             <div className="modal-header card-header card-header-glass" data-bs-theme="dark">
 
                                 <h5 className="user-select-auto card-title text-light">{
-                                    typeof props.title !== 'undefined' ? props.title : <input type="text" className="form-control-plaintext" id="modaltitle" name='title' placeholder="Title" required value={props.title} onChange={handleOnChange} />
+                                    typeof props.title !== 'undefined' ? props.title : <input type="text" className="form-control-plaintext" id="modaltitle" name='title' placeholder="Title" required  minLength={3} value={props.title} onChange={handleOnChange} />
                                 }</h5>
 
                                 <button type="button" className="btn-close light" onClick={closeModal} data-bs-dismiss="modal" aria-label="Close"></button>
@@ -62,7 +62,7 @@ const AddCards = (props) => {
 
                                     {typeof props.description !== 'undefined' ?
                                         <p className="user-select-auto card-text text-light">{props.description} </p> :
-                                        <textarea className="form-control-plaintext" id="modaldescription" value={props.description} placeholder='Description' rows="12" name='description' required onChange={handleOnChange} ></textarea>
+                                        <textarea className="form-control-plaintext" id="modaldescription" value={props.description} placeholder='Description' rows="12" name='description' required  minLength={3} onChange={handleOnChange} ></textarea>
                                     }
                                 </div>
                             </div>
@@ -74,7 +74,7 @@ const AddCards = (props) => {
                                     <button type="button" className="btn btn-secondary " onClick={closeModal}>Close</button>
                                     <button style={{ display: 'none' }} type="button" className="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#staticBackdrop1" ref={ref}></button>
                                     <button style={{ display: 'none' }} type="button" className="btn btn-secondary " data-bs-dismiss="modal" ref={reff}></button>
-                                    <button type="sumit" className="btn btn-primary" onClick={saveChanges} >Save changes</button>
+                                    <button disabled={notes.title.length<3 || notes.description.length<3} type="sumit" className="btn btn-primary" onClick={saveChanges} >Save changes</button>
                                 </div>
                             </div>
                         </div>

@@ -105,8 +105,8 @@ textarea {
 }
 
 .multi-text-truncate {
-    
-    height:calc(99%) ;
+
+    height: calc(99%);
     display: -webkit-box;
     -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
@@ -116,8 +116,40 @@ textarea {
 }
 
 .btn-danger {
-    background: rgb(220,53,69,0.7);
+    background: rgb(220, 53, 69, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    border: none;
+}
+
+.navbar-glasss {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.37);
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+    color: var(--bs-dropdown-link-hover-color);
+    /* background-color: var(--bs-dropdown-link-hover-bg); */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.input-field:focus {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: transparent;
+    outline: none;
+    box-shadow: none;
+}
+
+.input-field {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: none;
 }

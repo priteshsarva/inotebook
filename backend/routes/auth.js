@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../middleware/fetchuser');
 const secreatdata = "p#ite$h$a#vatheG#eat"
+let success = false
 
 // Route 1:creating a user in db, no Auth Require
 router.post('/createUser',
@@ -18,13 +19,15 @@ router.post('/createUser',
     //Recived user data validation and sending bad request if validation has errors
     const result = validationResult(req);
     if (!result.isEmpty()) {
-      return res.status(400).json({ errors: result.array() });
+      success = false
+      return res.status(400).json({ success, errors: result.array() });
     }
     try {
       //Checking Email alredy exist or not
       let user = await User.findOne({ email: req.body.email })
       if (user) {
-        return res.status(400).json({ "Error": "User with this email already exist" })
+        success = false
+        return res.status(400).json({ success, "Error": "User with this email already exist" })
       }
       //Password hasing
       const salt = bcrypt.genSaltSync(10);
@@ -38,13 +41,17 @@ router.post('/createUser',
       //Genrating user Auth Token
       const data = ({ "user": { id: user.id } })
       const authToken = jwt.sign(data, secreatdata)
-      return res.json({ authToken })
+      success = true
+
+      return res.json({ success, authToken })
     } catch (error) {
       // Checking if Any error occured from server side
       console.log("User not Saved");
-      return res.status(400).json(error)
+      success = false
+      return res.status(400).json(success, error)
     }
   })
+
 
 //Route 2:User Login, No Auth Require
 router.post('/login', [
@@ -55,42 +62,49 @@ router.post('/login', [
     //Recived user data validation and sending bad request if validation has errors
     const result = validationResult(req);
     if (!result.isEmpty()) {
-      return res.status(400).json({ errors: result.array() });
+      success = false
+      return res.status(400).json({ success, errors: result.array() });
     }
     const { email, password } = req.body
     try {
       //Checking Email alredy exist or not
       let user = await User.findOne({ email })
       if (!user) {
-        return res.status(400).json({ "Error": "Please Enter Correct credentials" })
+        success = false
+        return res.status(400).json({ success, "Error": "Please Enter Correct credentials" })
       };
       //checking passsword
       const passwordcompare = await bcrypt.compare(password, user.password)
       if (!passwordcompare) {
-        return res.status(400).json({ "Error": "Please Enter Correct credentials" })
+        success = false
+        return res.status(400).json({ success, "Error": "Please Enter Correct credentials" })
       }
       //Sending User authToken
       const data = ({ "user": { id: user.id } })
       const authToken = jwt.sign(data, secreatdata)
-      return res.json({ authToken })
+      success = true
+      return res.json({ success, authToken })
     } catch (error) {
       // Checking if Any error occured from server side
       console.log("User not Saved");
-      return res.status(400).json(error)
+      success = false
+      return res.status(400).json(success, error)
     }
   })
 
 // Route 3: Get userDetails
-router.post("/getuser",fetchuser, async (req, res) => {
+router.post("/getuser", fetchuser, async (req, res) => {
 
   try {
     const userid = req.user.id
     const user = await User.findById(userid).select('-password')
-    res.send(user)
+    success = true
+    return res.send({success,user})
   } catch (error) {
     // Checking if Any error occured from server side
     console.log(error);
-    return res.status(400).send("internal Error Occured")
+    success = false
+    return res.status(400).send(success, "internal Error Occured")
   }
 })
 

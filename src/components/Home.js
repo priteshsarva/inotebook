@@ -20,16 +20,25 @@ import NoteContext from '../context/notes/NotesContext';
 
 const Home = () => {
   const context = useContext(NoteContext)
-  const { notes, deleteNote, getAllNotes } = context;
+  const { notes, deleteNote } = context;
 
-  useEffect(() => {
-    getAllNotes()
-  }, )
+
+
 
   const [dnotes, setdnotes] = useState(notes)
+  const [displayStyle, setDisplayStyle] = useState('none')
+
+
   useEffect(() => {
     setdnotes(notes)
-  }, [notes])
+    if (notes === [] ) {
+      setDisplayStyle('')
+    }
+    console.log(notes);
+    console.log(localStorage.getItem('token'));
+  }, [notes])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+
+
 
   const refff = useRef(null)
   const editcard = useRef(null)
@@ -52,15 +61,15 @@ const Home = () => {
       description: document.querySelector(".swiper-slide-active").getAttribute("description"),
       tags: document.querySelector(".swiper-slide-active").getAttribute("tags"),
     })
-
-    console.log(editdata);
     editcard.current.click()
-
   }
+
+
+
 
   return (
     <>
-      <div className='d-flex align-items-center' style={{ height: "80vh" }}>
+      <div className={`${displayStyle === 'none' ? "" : "d-flex"} align-items-center`} style={{ height: "80vh", display: displayStyle }} >
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -81,7 +90,6 @@ const Home = () => {
           modules={[EffectCoverflow, Pagination, Navigation]}
           className="mySwiper"
         >
-
           {dnotes.map((notes) => {
             return <>
               <SwiperSlide key={notes._id} id={notes._id} title={notes.title} description={notes.description} tags={notes.tags} onClick={(e) => { openEditmodal(e) }} >
@@ -97,7 +105,7 @@ const Home = () => {
       </div>
 
       {/* delete btn */}
-      <div className='d-flex justify-content-center delete '>
+      <div className={`${displayStyle === 'none' ? "" : "d-flex"} justify-content-center delete `} style={{ display: displayStyle }}>
         <button type="button" data-bs-toggle="modal" data-bs-target="#delete" className={`btn btn-danger col-4 m-2 btn-value`} onClick={(e) => { deleteModal(e) }} >Delete</button>
       </div>
 
