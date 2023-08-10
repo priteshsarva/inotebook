@@ -14,13 +14,8 @@ html {
 }
 
 canvas {
-    outline: none;
-    display: block;
     position: absolute;
-    z-index: 0;
-    margin: auto;
-    margin-top: 56px;
-    height: 100vh;
+    z-index: -1;
 }
 
 .navbar-glass {

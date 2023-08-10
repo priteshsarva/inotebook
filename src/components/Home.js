@@ -69,7 +69,7 @@ const Home = () => {
 
   return (
     <>
-      <div className={`${displayStyle === 'none' ? "" : "d-flex"} align-items-center`} style={{ height: "80vh", display: displayStyle }} >
+      <div className={`${displayStyle === 'none' ? "" : "d-flex"}d-flex align-items-center`} style={{ height: "80vh", display: displayStyle }} >
         <Swiper
           effect={"coverflow"}
           grabCursor={true}

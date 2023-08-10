@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import AuthContext from '../context/auth/AuthContext'
 
 const Login = (props) => {
@@ -6,26 +6,17 @@ const Login = (props) => {
     const context = useContext(AuthContext)
     const { createUser, loginUser } = context
 
-   
+
 
     const [details, setdetails] = useState(props.head)
-    const [disp, setdisp] = useState()
-    const [dispLogin, setdispLogin] = useState()
-    const [data, setdata] = useState({ "name": "", "email": "", "password": "" })
-   
 
+    const [data, setdata] = useState({ "name": "", "email": "", "password": "" })
+
+    const close = useRef(null)
 
 
     useEffect(() => {
         setdetails(props.head)
-        if (props.head === "Login") {
-            setdisp("none")
-            setdispLogin("block")
-        }
-        if (props.head === "Signup") {
-            setdisp("block")
-            setdispLogin("none")
-        }
     }, [props])
 
     const onChange = (e) => {
@@ -36,10 +27,21 @@ const Login = (props) => {
         e.preventDefault()
         if (props.head === "Login") {
             loginUser(data)
+            close.current.click()
         } else if (props.head === "Signup") {
             createUser(data)
+             close.current.click()
         }
         console.log("onSubmit");
+    }
+
+
+    const remoValue = () => {
+        if (details === "Signup") {
+            // document.getElementById('name').value = ""
+        }
+        document.getElementById('email').value = ""
+        document.getElementById('password').value = ""
     }
 
 
@@ -72,7 +74,7 @@ const Login = (props) => {
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1 " class="form-label card-title text-light">Password</label>
-                                    <input type="password" name="password" class="form-control input-field" required id="exampleInputPassword1" value={data.password} onChange={onChange} />
+                                    <input type="password" name="password" class="form-control input-field" required id="password" value={data.password} onChange={onChange} />
                                 </div>
                                 {/* <div class="mb-3 form-check card-title text-light " style={{ display: dispLogin }}>
                                     <input type="checkbox" class="form-check-input" id="RemeberCheck" name="RemeberCheck" />
@@ -81,14 +83,14 @@ const Login = (props) => {
                             </div>
                             <div className="modal-footer">
                                 <div className='d-flex justify-content-evenly' style={{ width: '100%' }}>
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" ref={close} onClick={remoValue}>Close</button>
                                     {
                                         details === "Login" ?
-                                            <button type="submit" class="btn btn-primary" style={{ display: dispLogin }}>Login</button> : ""
+                                            <button type="submit" class="btn btn-primary" >Login</button> : ""
                                     }
                                     {
                                         details === "Signup" ?
-                                            <button type="submit" class="btn btn-primary" style={{ display: disp }} >Create Account</button> : ""
+                                            <button type="submit" class="btn btn-primary" >Create Account</button> : ""
                                     }
                                 </div>
                             </div>

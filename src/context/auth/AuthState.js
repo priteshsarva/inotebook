@@ -29,6 +29,7 @@ const AuthState = (props) => {
 
         if (json.success) {
             localStorage.setItem("token", json.authToken);
+            getAllNotes();
         } else {
             alert(json.Error)
         }
@@ -48,7 +49,9 @@ const AuthState = (props) => {
         const json = await response.json();
         console.log(json);
         if (json.success) {
-            localStorage.setItem("token", json.authToken);            
+            localStorage.setItem("token", json.authToken);
+            getAllNotes();
+         
         } else {
             alert(json.Error)
         }
@@ -60,7 +63,7 @@ const AuthState = (props) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Auth-Token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRiNjFjMWY5N2Q2MDgzN2MzNDYyNTYzIn0sImlhdCI6MTY4OTY1NjQzNH0.6Gic2vlZDujkfA9y4FIeqaWkyOu-t6ZLpQ372CslVTU'
+                "Auth-Token": localStorage.getItem('token')
             }
         });
         const json = await response.json();
