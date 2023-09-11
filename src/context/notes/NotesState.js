@@ -17,8 +17,8 @@ const NoteState = (props) => {
   // ADD NOTE TO DB 
 
 
-  const getAllNotes = async (loginauthToken) => {
-    
+  const getAllNotes = async(loginauthToken) => {
+
     if (authToken !== null) {
       const response = await fetch(`${url}/api/notes/getallnotes`, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -30,7 +30,7 @@ const NoteState = (props) => {
       const json = await response.json()
       console.log(json);
       setNotes(json)
-    }else{
+    } else {
       const response = await fetch(`${url}/api/notes/getallnotes`, {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
         headers: {
@@ -42,7 +42,7 @@ const NoteState = (props) => {
       console.log(json);
       setNotes(json)
     }
-    
+
   }
 
 
@@ -110,7 +110,7 @@ const NoteState = (props) => {
   }
 
   return (
-    <NoteContext.Provider value={{ getAllNotes, notes, addNote, deleteNote, editNote }}>
+    <NoteContext.Provider value={{ getAllNotes, notes, setNotes, addNote, deleteNote, editNote }}>
       {props.children}
     </NoteContext.Provider>
   )

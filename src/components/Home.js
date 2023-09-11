@@ -20,7 +20,7 @@ import NoteContext from '../context/notes/NotesContext';
 
 const Home = () => {
   const context = useContext(NoteContext)
-  const { notes, deleteNote } = context;
+  const { notes, deleteNote, getAllNotes } = context;
 
 
 
@@ -30,13 +30,22 @@ const Home = () => {
 
 
   useEffect(() => {
+     getAllNotes()
+  }, [])
+  
+
+  useEffect( () => {
     setdnotes(notes)
-    if (notes === [] ) {
-      setDisplayStyle('')
+    if (localStorage.getItem('token') === null ) {
+      
+      setDisplayStyle('none')
+    }else{
+   
+      setDisplayStyle('block')
     }
     console.log(notes);
     console.log(localStorage.getItem('token'));
-  }, [notes])                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  }, [notes])
 
 
 
@@ -69,7 +78,7 @@ const Home = () => {
 
   return (
     <>
-      <div className={`${displayStyle === 'none' ? "" : "d-flex"}d-flex align-items-center`} style={{ height: "80vh", display: displayStyle }} >
+      <div className={`${localStorage.getItem('token') === null ? "" : "d-flex align-items-center"}`} style={{ height: "80vh", display: displayStyle }} >
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -105,7 +114,7 @@ const Home = () => {
       </div>
 
       {/* delete btn */}
-      <div className={`${displayStyle === 'none' ? "" : "d-flex"} justify-content-center delete `} style={{ display: displayStyle }}>
+      <div className={`${displayStyle === 'none' ? "" : "d-flex justify-content-center delete"}`} style={{ display: displayStyle }}>
         <button type="button" data-bs-toggle="modal" data-bs-target="#delete" className={`btn btn-danger col-4 m-2 btn-value`} onClick={(e) => { deleteModal(e) }} >Delete</button>
       </div>
 

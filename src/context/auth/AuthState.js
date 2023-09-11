@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import AuthContext from './AuthContext'
 import NoteContext from '../notes/NotesContext';
- 
+
 
 const AuthState = (props) => {
 
@@ -29,7 +29,7 @@ const AuthState = (props) => {
 
         if (json.success) {
             localStorage.setItem("token", json.authToken);
-            getAllNotes();
+            getAllNotes(json.authToken);
         } else {
             alert(json.Error)
         }
@@ -50,8 +50,8 @@ const AuthState = (props) => {
         console.log(json);
         if (json.success) {
             localStorage.setItem("token", json.authToken);
-            getAllNotes();
-         
+            getAllNotes(json.authToken);
+            await getUserDetails()
         } else {
             alert(json.Error)
         }
@@ -69,7 +69,7 @@ const AuthState = (props) => {
         const json = await response.json();
         console.log(json);
         if (json.success) {
-            localStorage.setItem("token", json.authToken);
+            localStorage.setItem("name", json.user.name);
         } else {
             alert(json.Error)
         }

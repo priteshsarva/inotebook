@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import CircleUser from './svg/CircleUser'
 import {
     Link,
@@ -6,13 +6,24 @@ import {
 } from "react-router-dom";
 import AddCards from './AddCards';
 import Login from './Login';
-
+import NoteContext from '../context/notes/NotesContext';
 
 const Navbar = () => {
+
+
+    const context = useContext(NoteContext)
+    const { setNotes } = context
 
     const [header, setheader] = useState()
     let location = useLocation();
     const launch = useRef(null)
+
+    React.useEffect(() => {
+        if (localStorage.getItem('token') === null) {
+            setheader('Login')
+            launch.current.click()
+        }
+    }, [localStorage.getItem('token')]);
 
     React.useEffect(() => {
     }, [location]);
@@ -26,13 +37,14 @@ const Navbar = () => {
         launch.current.click()
     }
     const logout = () => {
-        localStorage.removeItem('token')
+        localStorage.clear()
+        setNotes([])
     }
 
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-glass" data-bs-theme="dark" style={{zIndex:99}}>
+            <nav className="navbar navbar-expand-lg navbar-glass" data-bs-theme="dark" style={{ zIndex: 99 }}>
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/">Notes</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +52,7 @@ const Navbar = () => {
                     </button>
                     <div className="collapse navbar-collapse " id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto ">
-                            <li className="nav-item">
+                            <li className="nav-item" style={{ display: localStorage.getItem('token') === null ? "none" : "" }}>
                                 <Link className={`nav-link ${location.pathname === "/add" ? "active" : ""}`} aria-current="page" data-bs-toggle="modal" data-bs-target="#staticBackdrop">ADD</Link>
                             </li>
 
@@ -53,7 +65,7 @@ const Navbar = () => {
                         <div className="btn-group  navbar-nav">
 
                             <div type="button" className="nav-item dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                <div type="button" className="btn nav-link"> <CircleUser fill={"white"} width={"1.5em"} marginRight={"0.25em"} /> Action</div>
+                                <div type="button" className="btn nav-link"> <CircleUser fill={"white"} width={"1.5em"} marginRight={"0.25em"} /> {localStorage.getItem('name') !== null ? localStorage.getItem('name') : "User"}</div>
                             </div>
 
                             <ul className="dropdown-menu dropdown-menu-end navbar-glasss">

@@ -25,12 +25,18 @@ const Login = (props) => {
 
     const onSubmit = (e) => {
         e.preventDefault()
-        if (props.head === "Login") {
+        if (details === "Login") {
             loginUser(data)
+            document.getElementById('email').value = ""
+            document.getElementById('password').value = ""
             close.current.click()
-        } else if (props.head === "Signup") {
+        } else if (details === "Signup") {
+            console.log("HEad");
             createUser(data)
-             close.current.click()
+            document.getElementById('name').value = ""
+            document.getElementById('email').value = ""
+            document.getElementById('password').value = ""
+            close.current.click()
         }
         console.log("onSubmit");
     }
@@ -38,7 +44,7 @@ const Login = (props) => {
 
     const remoValue = () => {
         if (details === "Signup") {
-            // document.getElementById('name').value = ""
+            document.getElementById('name').value = ""
         }
         document.getElementById('email').value = ""
         document.getElementById('password').value = ""
@@ -61,36 +67,36 @@ const Login = (props) => {
                             <div className="modal-body  mt-4  mb-5">
                                 {
                                     details === "Signup" ?
-                                        <div class="mb-3" >
-                                            <label for="exampleInputEmail1 " class="form-label card-title text-light" >Name</label>
-                                            <input type="text" class="form-control  input-field" required minLength={3} value={data.name} onChange={onChange} id="name" name="name" aria-describedby="emailHelp" />
+                                        <div className="mb-3" >
+                                            <label htmlFor="exampleInputEmail1 " className="form-label card-title text-light" >Name</label>
+                                            <input type="text" className="form-control  input-field" required minLength={3} value={data.name} onChange={onChange} id="name" name="name" aria-describedby="emailHelp" />
                                         </div> : ""
                                 }
 
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1 " class="form-label card-title text-light  ">Email address</label>
-                                    <input type="email" class="form-control  input-field " required value={data.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
-                                    <div id="emailHelp" class="form-text card-title text-light" >We'll never share your email with anyone else.</div>
+                                <div className="mb-3">
+                                    <label htmlFor="exampleInputEmail1 " className="form-label card-title text-light  ">Email address</label>
+                                    <input type="email" className="form-control  input-field " required value={data.email} onChange={onChange} id="email" name="email" aria-describedby="emailHelp" />
+                                    <div id="emailHelp" className="form-text card-title text-light" >We'll never share your email with anyone else.</div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1 " class="form-label card-title text-light">Password</label>
-                                    <input type="password" name="password" class="form-control input-field" required id="password" value={data.password} onChange={onChange} />
+                                <div className="mb-3">
+                                    <label htmlFor="exampleInputPassword1 " className="form-label card-title text-light">Password</label>
+                                    <input type="password" name="password" className="form-control input-field" required id="password" value={data.password} onChange={onChange} />
                                 </div>
-                                {/* <div class="mb-3 form-check card-title text-light " style={{ display: dispLogin }}>
-                                    <input type="checkbox" class="form-check-input" id="RemeberCheck" name="RemeberCheck" />
-                                    <label class="form-check-label" for="exampleCheck1 ">Remeber me</label>
-                                </div> */}
+                                <div className="mb-3" >
+                                    <label htmlFor="exampleInputPassword1 " className="form-label card-title text-light" onClick={() => { setdetails("Login") }} style={{ display: details === "Signup" ? "" : "none" }}>Alredy Have an Account?</label>
+                                    <label htmlFor="exampleInputPassword1 " className="form-label card-title text-light" onClick={() => { setdetails("Signup") }} style={{ display: details === "Login" ? "" : "none" }}>Create an Account</label>
+                                </div>
                             </div>
                             <div className="modal-footer">
                                 <div className='d-flex justify-content-evenly' style={{ width: '100%' }}>
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" ref={close} onClick={remoValue}>Close</button>
                                     {
                                         details === "Login" ?
-                                            <button type="submit" class="btn btn-primary" >Login</button> : ""
+                                            <button type="submit" className="btn btn-primary" >Login</button> : ""
                                     }
                                     {
                                         details === "Signup" ?
-                                            <button type="submit" class="btn btn-primary" >Create Account</button> : ""
+                                            <button type="submit" className="btn btn-primary" >Create Account</button> : ""
                                     }
                                 </div>
                             </div>
