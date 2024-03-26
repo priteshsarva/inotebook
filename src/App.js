@@ -2,6 +2,7 @@ import React from 'react'
 import Home from './components/Home'
 import Navbar from './components/Navbar'
 import Aboutus from './components/Aboutus'
+import Canvas from './components/Canvas'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css"
 import NoteState from './context/notes/NotesState';
@@ -14,6 +15,7 @@ const App = () => {
         <AuthState>
           <BrowserRouter>
             <Navbar />
+            
             <Routes>
               <Route path="/about" element={<Aboutus />} />
               <Route path="/" element={<Home />} />

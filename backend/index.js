@@ -17,6 +17,7 @@ app.use('/api/notes/',require('./routes/notes'))
 
 app.get('/', (req, res) => {
   res.send("hello")
+
 })
 
 app.listen(port, () => {
